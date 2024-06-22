@@ -3,16 +3,27 @@ package ru.netology.statistic;
 public class Radio {
     private int currentStation;
     private int currentVolume;
+    private int numberOfStations;
 
+    // Default constructor with 10 stations
+    public Radio() {
+        this.numberOfStations = 10;
+    }
+
+    // Constructor with custom number of stations
+    public Radio(int numberOfStations) {
+        this.numberOfStations = numberOfStations;
+    }
+
+    // Getters and setters
     public int getCurrentStation() {
         return currentStation;
     }
 
     public void setCurrentStation(int currentStation) {
-        if (currentStation < 0 || currentStation > 9) {
-            return;
+        if (currentStation >= 0 && currentStation < numberOfStations) {
+            this.currentStation = currentStation;
         }
-        this.currentStation = currentStation;
     }
 
     public int getCurrentVolume() {
@@ -20,28 +31,33 @@ public class Radio {
     }
 
     public void setCurrentVolume(int currentVolume) {
-        if (currentVolume < 0 || currentVolume > 100) {
-            return;
+        if (currentVolume >= 0 && currentVolume <= 100) {
+            this.currentVolume = currentVolume;
         }
-        this.currentVolume = currentVolume;
     }
 
-    public void next() {
-        if (currentStation == 9) {
+    public int getNumberOfStations() {
+        return numberOfStations;
+    }
+
+    // Methods to change station
+    public void nextStation() {
+        if (currentStation == numberOfStations - 1) {
             currentStation = 0;
         } else {
             currentStation++;
         }
     }
 
-    public void prev() {
+    public void prevStation() {
         if (currentStation == 0) {
-            currentStation = 9;
+            currentStation = numberOfStations - 1;
         } else {
             currentStation--;
         }
     }
 
+    // Methods to change volume
     public void increaseVolume() {
         if (currentVolume < 100) {
             currentVolume++;
@@ -54,3 +70,4 @@ public class Radio {
         }
     }
 }
+
